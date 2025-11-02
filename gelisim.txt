@@ -1,0 +1,2 @@
+edit formuna gidilmeden resim eklenebilmeli
+cloudinaryden gelen resim ölçeklenmeli ve max 10 tane falan olmalı.
