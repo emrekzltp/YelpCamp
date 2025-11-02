@@ -18,7 +18,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local')
 const User = require('./models/user.js');
 const helmet = require('helmet');
-const dbUrl = 'mongodb://localhost:27017/yelp-camp';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 
 const store = MongoStore.create({ //session nesneleri sessions diye bir collectionsda saklanıyor.
     mongoUrl: dbUrl,
@@ -74,7 +74,7 @@ const reviewRoutes = require('./routes/reviews.js');
 const userRoutes = require('./routes/users.js');
 
 const sessionConfig = {
-    store, 
+    store,
     name: 'session', //session id default ismi değiştirilir.
     secret: 'thisshouldbeabettersecret',
     resave: false,
