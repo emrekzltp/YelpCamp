@@ -1,7 +1,7 @@
 if (process.env.NODE_ENV !== "production") {
     require('dotenv').config();
 }
-app.locals.maptilerApiKey = process.env.MAPTILER_API_KEY;
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -11,6 +11,7 @@ const flash = require('connect-flash');
 const ExpressError = require('./utils/ExpressError');
 const sanitizeV5 = require('./utils/mongoSanitizeV5.js');
 const app = express();
+app.locals.maptilerApiKey = process.env.MAPTILER_API_KEY;
 app.set('query parser', 'extended');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
