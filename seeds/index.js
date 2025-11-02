@@ -1,11 +1,15 @@
+if (process.env.NODE_ENV !== "production") { //env dosyasını kullanmak için.
+    require('dotenv').config();
+}
 
 const mongoose = require('mongoose');
 const Campground = require('../models/campground'); //farklı klasörde olduğu için .. kullandık.
 const cities = require('./cities');
 const { places, descriptors } = require(`./seedHelpers`); //exportlanan iki array de alınır.
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp')
+mongoose.connect(dbUrl)
     .then(() => {
         console.log("Database Connected!");
     })
@@ -29,7 +33,7 @@ const seedDb = async () => { //promise dönderir
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
-            author: '68ce446c7a463407d16fc32f',
+            author: '68d42faad415bfc854314e5c',
             location: `${cities[random1000].city},${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)} `,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias rem sequi, consequatur error provident iusto illo veniam ipsa soluta perspiciatis repudiandae, labore pariatur distinctio? Exercitationem animi autem sunt laborum. Tempore?',
@@ -39,7 +43,7 @@ const seedDb = async () => { //promise dönderir
                 coordinates: [
                     cities[random1000].longitude,
                     cities[random1000].latitude
-                    ]
+                ]
 
             },
             images: [
